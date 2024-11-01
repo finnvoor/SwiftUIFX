@@ -1,0 +1,1 @@
+FxPrincipal.startServicePrincipal()
