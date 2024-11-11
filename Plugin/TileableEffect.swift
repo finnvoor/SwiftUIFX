@@ -11,6 +11,8 @@ class TileableEffect: NSObject, FxTileableEffect {
 
     // MARK: Internal
 
+    let apiManager: PROAPIAccessing
+
     var properties: [String: Any] {
         [
             kFxPropertyKey_MayRemapTime: false,
@@ -18,12 +20,11 @@ class TileableEffect: NSObject, FxTileableEffect {
         ]
     }
 
-    var parameterCreationAPI: FxParameterCreationAPI_v5 {
-        apiManager.api(for: FxParameterCreationAPI_v5.self) as! FxParameterCreationAPI_v5
-    }
-
-    var parameterRetrievalAPI: FxParameterRetrievalAPI_v6 {
-        apiManager.api(for: FxParameterRetrievalAPI_v6.self) as! FxParameterRetrievalAPI_v6
+    func pluginState(
+        at _: CMTime,
+        quality _: UInt
+    ) throws -> Data? {
+        nil
     }
 
     func destinationImageRect(
@@ -49,13 +50,12 @@ class TileableEffect: NSObject, FxTileableEffect {
         sourceImages: [CIImage],
         pluginState _: Data?,
         at _: CMTime
-    ) -> CIImage {
+    ) throws -> CIImage {
         sourceImages.first ?? .clear
     }
 
     // MARK: Private
 
-    private let apiManager: PROAPIAccessing
     private let context = CIContext()
 }
 
@@ -70,11 +70,18 @@ extension TileableEffect {
         properties?.pointee = self.properties as NSDictionary
     }
 
-    func pluginState(
-        _: AutoreleasingUnsafeMutablePointer<NSData>?,
-        at _: CMTime,
-        quality _: UInt
-    ) throws {}
+    final func pluginState(
+        _ pluginState: AutoreleasingUnsafeMutablePointer<NSData>?,
+        at renderTime: CMTime,
+        quality qualityLevel: UInt
+    ) throws {
+        if let state = try self.pluginState(
+            at: renderTime,
+            quality: qualityLevel
+        ) {
+            pluginState?.pointee = state as NSData
+        }
+    }
 
     final func destinationImageRect(
         _ destinationImageRect: UnsafeMutablePointer<FxRect>,
@@ -122,7 +129,7 @@ extension TileableEffect {
             )
         }
 
-        var renderedImage = renderDestinationImage(
+        var renderedImage = try renderDestinationImage(
             sourceImages: sourceImages,
             pluginState: pluginState,
             at: renderTime

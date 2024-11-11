@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftUIFX
 
 // MARK: - SwiftUIViewGenerator
 
@@ -13,14 +14,14 @@ import SwiftUI
     }
 
     override func addParameters() throws {
-        parameterCreationAPI.addStringParameter(
+        apiManager.parameterCreationAPI.addStringParameter(
             withName: "Package Path (Drag & Drop)",
             parameterID: 1,
             defaultValue: "",
             parameterFlags: FxParameterFlags(kFxParameterFlag_DEFAULT)
         )
 
-        parameterCreationAPI.addPushButton(
+        apiManager.parameterCreationAPI.addPushButton(
             withName: "Compile",
             parameterID: 2,
             selector: #selector(SwiftUIViewGenerator.compile),
@@ -32,15 +33,38 @@ import SwiftUI
         compile()
     }
 
+    override func pluginState(
+        at renderTime: CMTime,
+        quality _: UInt
+    ) throws -> Data? {
+        try JSONEncoder().encode(State(
+            timelineTime: apiManager.timingAPI.timelineTime(fromInputTime: renderTime),
+            timelineTimeRange: .init(
+                start: apiManager.timingAPI.inPointTimeOfTimeline,
+                end: apiManager.timingAPI.outPointTimeOfTimeline
+            ),
+            generatorTimeRange: .init(
+                start: apiManager.timingAPI.timelineTime(fromInputTime: apiManager.timingAPI.startTime),
+                duration: apiManager.timingAPI.timelineTime(fromInputTime: apiManager.timingAPI.duration)
+            )
+        ))
+    }
+
     override func renderDestinationImage(
         sourceImages: [CIImage],
-        pluginState _: Data?,
+        pluginState: Data?,
         at _: CMTime
-    ) -> CIImage {
+    ) throws -> CIImage {
         guard let view else { return .clear }
+
+        let state = try JSONDecoder().decode(State.self, from: pluginState ?? Data())
+
         return DispatchQueue.main.sync {
             let renderer = ImageRenderer(
                 content: view
+                    .environment(\.timelineTime, state.timelineTime)
+                    .environment(\.timelineTimeRange, state.timelineTimeRange)
+                    .environment(\.generatorTimeRange, state.generatorTimeRange)
                     .frame(width: sourceImages[0].extent.width, height: sourceImages[0].extent.height)
             )
             renderer.proposedSize = .init(sourceImages[0].extent.size)
@@ -53,10 +77,20 @@ import SwiftUI
     private var view: AnyView?
 }
 
+// MARK: SwiftUIViewGenerator.State
+
+extension SwiftUIViewGenerator {
+    struct State: Codable {
+        let timelineTime: CMTime
+        let timelineTimeRange: CMTimeRange
+        let generatorTimeRange: CMTimeRange
+    }
+}
+
 extension SwiftUIViewGenerator {
     @objc func compile() {
         var packagePath: NSString = ""
-        parameterRetrievalAPI.getStringParameterValue(&packagePath, fromParameter: 1)
+        apiManager.parameterRetrievalAPI.getStringParameterValue(&packagePath, fromParameter: 1)
         let package = URL(filePath: packagePath as String)
 
         guard !(packagePath as String).isEmpty else { return }
