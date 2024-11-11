@@ -14,8 +14,8 @@
 		6ED15EC92CD55F12005E38B1 /* PluginManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED15EC82CD55F12005E38B1 /* PluginManager.framework */; };
 		6ED15ECB2CD55F12005E38B1 /* FxPlug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED15ECA2CD55F12005E38B1 /* FxPlug.framework */; };
 		6ED15F652CD59553005E38B1 /* Plugin.pluginkit in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = 6ED15EBE2CD55F12005E38B1 /* Plugin.pluginkit */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6ED1605F2CD936FF005E38B1 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6ED1605E2CD936FF005E38B1 /* Config.xcconfig */; };
-		6ED160602CD936FF005E38B1 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6ED1605E2CD936FF005E38B1 /* Config.xcconfig */; };
+		6EDFED492CE2B158003C1B4F /* libSwiftUIFX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDFED482CE2B158003C1B4F /* libSwiftUIFX.dylib */; };
+		6EDFED4A2CE2B158003C1B4F /* libSwiftUIFX.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6EDFED482CE2B158003C1B4F /* libSwiftUIFX.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,10 +40,21 @@
 			name = "Embed PlugIns";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6EDFED4B2CE2B158003C1B4F /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6EDFED4A2CE2B158003C1B4F /* libSwiftUIFX.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6ED15EB32CD55F12005E38B1 /* SwiftUIFX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIFX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6ED15EB32CD55F12005E38B1 /* SwiftUIFX Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUIFX Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ED15EB62CD55F12005E38B1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		6ED15EBE2CD55F12005E38B1 /* Plugin.pluginkit */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Plugin.pluginkit; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ED15EC22CD55F12005E38B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -52,35 +63,31 @@
 		6ED15EC82CD55F12005E38B1 /* PluginManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PluginManager.framework; path = Library/Frameworks/../../../../../../Library/Developer/Frameworks/PluginManager.framework; sourceTree = DEVELOPER_DIR; };
 		6ED15ECA2CD55F12005E38B1 /* FxPlug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FxPlug.framework; path = Library/Frameworks/../../../../../../Library/Developer/Frameworks/FxPlug.framework; sourceTree = DEVELOPER_DIR; };
 		6ED1605E2CD936FF005E38B1 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		6EDFED482CE2B158003C1B4F /* libSwiftUIFX.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSwiftUIFX.dylib; path = .build/apple/Products/Release/libSwiftUIFX.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		6ED15F592CD5601D005E38B1 /* Exceptions for "Plugin" folder in "SwiftUIFX" target */ = {
+		6EAB614C2CD9538D0061B077 /* Exceptions for "macOS App" folder in "macOS App" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Supporting Files/Info.plist",
+			);
+			target = 6ED15EB22CD55F12005E38B1 /* macOS App */;
+		};
+		6ED15F592CD5601D005E38B1 /* Exceptions for "Plugin" folder in "macOS App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Extensions/CMTime+Extensions.swift",
+				"Extensions/CMTimeRange+Extensions.swift",
 				"Extensions/FxRect+Extensions.swift",
+				"Extensions/FxTimingAPI_v4+Extensions.swift",
+				"Extensions/PROAPIAccessing+Extensions.swift",
 				Generators/SwiftUIViewGenerator.swift,
 				main.swift,
 				"Supporting Files/Info.plist",
 				TileableEffect.swift,
 			);
-			target = 6ED15EB22CD55F12005E38B1 /* SwiftUIFX */;
-		};
-		6ED15F5A2CD5601D005E38B1 /* Exceptions for "SwiftUIFX" folder in "SwiftUIFX" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Supporting Files/Info.plist",
-			);
-			target = 6ED15EB22CD55F12005E38B1 /* SwiftUIFX */;
-		};
-		6ED15F5B2CD56020005E38B1 /* Exceptions for "SwiftUIFX" folder in "Plugin" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"/Localized: MainMenu.xib",
-				AppDelegate.swift,
-				"Supporting Files/Info.plist",
-			);
-			target = 6ED15EBD2CD55F12005E38B1 /* Plugin */;
+			target = 6ED15EB22CD55F12005E38B1 /* macOS App */;
 		};
 		6ED15F5C2CD56020005E38B1 /* Exceptions for "Plugin" folder in "Plugin" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -92,22 +99,21 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6E722F482CD951F6006A8679 /* macOS App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6EAB614C2CD9538D0061B077 /* Exceptions for "macOS App" folder in "macOS App" target */,
+			);
+			path = "macOS App";
+			sourceTree = "<group>";
+		};
 		6ED15F352CD55F55005E38B1 /* Plugin */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				6ED15F592CD5601D005E38B1 /* Exceptions for "Plugin" folder in "SwiftUIFX" target */,
+				6ED15F592CD5601D005E38B1 /* Exceptions for "Plugin" folder in "macOS App" target */,
 				6ED15F5C2CD56020005E38B1 /* Exceptions for "Plugin" folder in "Plugin" target */,
 			);
 			path = Plugin;
-			sourceTree = "<group>";
-		};
-		6ED15F402CD55F55005E38B1 /* SwiftUIFX */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				6ED15F5A2CD5601D005E38B1 /* Exceptions for "SwiftUIFX" folder in "SwiftUIFX" target */,
-				6ED15F5B2CD56020005E38B1 /* Exceptions for "SwiftUIFX" folder in "Plugin" target */,
-			);
-			path = SwiftUIFX;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -127,6 +133,7 @@
 			files = (
 				6ED15EC72CD55F12005E38B1 /* Accelerate.framework in Frameworks */,
 				6ED15EC92CD55F12005E38B1 /* PluginManager.framework in Frameworks */,
+				6EDFED492CE2B158003C1B4F /* libSwiftUIFX.dylib in Frameworks */,
 				6ED15EC32CD55F12005E38B1 /* Foundation.framework in Frameworks */,
 				6ED15EC52CD55F12005E38B1 /* AppKit.framework in Frameworks */,
 				6ED15ECB2CD55F12005E38B1 /* FxPlug.framework in Frameworks */,
@@ -139,9 +146,9 @@
 		6ED15EAA2CD55F12005E38B1 = {
 			isa = PBXGroup;
 			children = (
+				6E722F482CD951F6006A8679 /* macOS App */,
 				6ED1605E2CD936FF005E38B1 /* Config.xcconfig */,
 				6ED15F352CD55F55005E38B1 /* Plugin */,
-				6ED15F402CD55F55005E38B1 /* SwiftUIFX */,
 				6ED15EB52CD55F12005E38B1 /* Frameworks */,
 				6ED15EB42CD55F12005E38B1 /* Products */,
 			);
@@ -150,7 +157,7 @@
 		6ED15EB42CD55F12005E38B1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6ED15EB32CD55F12005E38B1 /* SwiftUIFX.app */,
+				6ED15EB32CD55F12005E38B1 /* SwiftUIFX Mac.app */,
 				6ED15EBE2CD55F12005E38B1 /* Plugin.pluginkit */,
 			);
 			name = Products;
@@ -159,6 +166,7 @@
 		6ED15EB52CD55F12005E38B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6EDFED482CE2B158003C1B4F /* libSwiftUIFX.dylib */,
 				6ED15EB62CD55F12005E38B1 /* Cocoa.framework */,
 				6ED15EC22CD55F12005E38B1 /* Foundation.framework */,
 				6ED15EC42CD55F12005E38B1 /* AppKit.framework */,
@@ -172,9 +180,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6ED15EB22CD55F12005E38B1 /* SwiftUIFX */ = {
+		6ED15EB22CD55F12005E38B1 /* macOS App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6ED15EF52CD55F12005E38B1 /* Build configuration list for PBXNativeTarget "SwiftUIFX" */;
+			buildConfigurationList = 6ED15EF52CD55F12005E38B1 /* Build configuration list for PBXNativeTarget "macOS App" */;
 			buildPhases = (
 				6ED15EAF2CD55F12005E38B1 /* Sources */,
 				6ED15EB02CD55F12005E38B1 /* Frameworks */,
@@ -187,14 +195,14 @@
 				6ED15EC12CD55F12005E38B1 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				6E722F482CD951F6006A8679 /* macOS App */,
 				6ED15F352CD55F55005E38B1 /* Plugin */,
-				6ED15F402CD55F55005E38B1 /* SwiftUIFX */,
 			);
-			name = SwiftUIFX;
+			name = "macOS App";
 			packageProductDependencies = (
 			);
 			productName = "Wrapper Application";
-			productReference = 6ED15EB32CD55F12005E38B1 /* SwiftUIFX.app */;
+			productReference = 6ED15EB32CD55F12005E38B1 /* SwiftUIFX Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6ED15EBD2CD55F12005E38B1 /* Plugin */ = {
@@ -206,14 +214,15 @@
 				6ED15EBA2CD55F12005E38B1 /* Resources */,
 				6ED15EBB2CD55F12005E38B1 /* Copy and Code Sign FxPlug.framework */,
 				6ED15EBC2CD55F12005E38B1 /* Copy and Code Sign PluginManager.framework */,
+				6EDFED4B2CE2B158003C1B4F /* Embed Libraries */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6EDFED752CE2B3A5003C1B4F /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				6ED15F352CD55F55005E38B1 /* Plugin */,
-				6ED15F402CD55F55005E38B1 /* SwiftUIFX */,
 			);
 			name = Plugin;
 			packageProductDependencies = (
@@ -249,12 +258,15 @@
 			);
 			mainGroup = 6ED15EAA2CD55F12005E38B1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				6EAB61492CD953150061B077 /* XCLocalSwiftPackageReference "../SwiftUIFX" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6ED15EB42CD55F12005E38B1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6ED15EB22CD55F12005E38B1 /* SwiftUIFX */,
+				6ED15EB22CD55F12005E38B1 /* macOS App */,
 				6ED15EBD2CD55F12005E38B1 /* Plugin */,
 			);
 		};
@@ -265,7 +277,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ED160602CD936FF005E38B1 /* Config.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,7 +284,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ED1605F2CD936FF005E38B1 /* Config.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +355,10 @@
 			target = 6ED15EBD2CD55F12005E38B1 /* Plugin */;
 			targetProxy = 6ED15EC02CD55F12005E38B1 /* PBXContainerItemProxy */;
 		};
+		6EDFED752CE2B3A5003C1B4F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 6EDFED742CE2B3A5003C1B4F /* SwiftUIFX */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -360,6 +374,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/.build/apple/Products/Release",
 				);
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = com.finnvoorhees.SwiftUIFX.plugin;
@@ -382,6 +400,10 @@
 					"$(inherited)",
 					"@loader_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/.build/apple/Products/Release",
+				);
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = com.finnvoorhees.SwiftUIFX.plugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -394,14 +416,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6ED1605E2CD936FF005E38B1 /* Config.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "SwiftUIFX/Supporting Files/Entitlements.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "$(TARGET_NAME)/Supporting Files/Entitlements.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YF6GMG9Q86;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				INFOPLIST_FILE = "SwiftUIFX/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(TARGET_NAME)/Supporting Files/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.finnvoorhees.SwiftUIFX;
-				PRODUCT_NAME = SwiftUIFX;
+				PRODUCT_NAME = "SwiftUIFX Mac";
 				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
@@ -410,14 +432,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6ED1605E2CD936FF005E38B1 /* Config.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "SwiftUIFX/Supporting Files/Entitlements.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "$(TARGET_NAME)/Supporting Files/Entitlements.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YF6GMG9Q86;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				INFOPLIST_FILE = "SwiftUIFX/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(TARGET_NAME)/Supporting Files/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.finnvoorhees.SwiftUIFX;
-				PRODUCT_NAME = SwiftUIFX;
+				PRODUCT_NAME = "SwiftUIFX Mac";
 				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
@@ -577,7 +599,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6ED15EF52CD55F12005E38B1 /* Build configuration list for PBXNativeTarget "SwiftUIFX" */ = {
+		6ED15EF52CD55F12005E38B1 /* Build configuration list for PBXNativeTarget "macOS App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6ED15EF62CD55F12005E38B1 /* Debug */,
@@ -587,6 +609,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		6EAB61492CD953150061B077 /* XCLocalSwiftPackageReference "../SwiftUIFX" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../SwiftUIFX;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6EDFED742CE2B3A5003C1B4F /* SwiftUIFX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6EAB61492CD953150061B077 /* XCLocalSwiftPackageReference "../SwiftUIFX" */;
+			productName = SwiftUIFX;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6ED15EAB2CD55F12005E38B1 /* Project object */;
 }

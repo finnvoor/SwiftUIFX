@@ -42,3 +42,34 @@ struct MyView: View {
 6. Select the generator, navigate to the generator inspector, and drag the top level directory of your Swift package into the "Package Path" text field.
 7. Press the "Compile" button to compile your view. It should now be displayed in your video timeline.
 8. Any time you make a change to your package you will need to press the "Compile" button again.
+
+### Environment Values
+
+To access environment values in your SwiftUI view:
+1. Add SwiftUIFX as a dependency of your package.
+```swift
+let package = Package(
+    name: "MyVideoOverlay",
+    platforms: [.macOS(.v13)],
+    products: [.library(name: "MyVideoOverlay", type: .dynamic, targets: ["MyVideoOverlay"])],
+    dependencies: [.package(url: "https://github.com/finnvoor/SwiftUIFX.git", branch: "main")],
+    targets: [.target(name: "MyVideoOverlay", dependencies: [.product(name: "SwiftUIFX", package: "SwiftUIFX")])]
+)
+```
+2. Import SwiftUIFX in your SwiftUI view.
+```swift
+import SwiftUIFX
+```
+3. Access the environment value using the `Environment` property wrapper.
+```swift
+@Environment(\.timelineTime) var timelineTime: CMTime
+@Environment(\.timelineTimeRange) var timelineTimeRange: CMTimeRange
+@Environment(\.generatorTimeRange) var generatorTimeRange: CMTimeRange
+```
+
+### Development
+
+1. Clone the repository.
+2. Run `swift build -c release --arch arm64 --arch x86_64` at the top level of the repository.
+3. Change the code sign identity in the build script phases of Plugin ("Copy and Code Sign FxPlug.framework" and "Copy and Code Sign PluginManager.framework"). 
+4. Open `SwiftUIFX.xcodeproj`.

@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6ED15EB22CD55F12005E38B1"
-               BuildableName = "SwiftUIFX.app"
-               BlueprintName = "SwiftUIFX"
+               BuildableName = "SwiftUIFX Mac.app"
+               BlueprintName = "macOS App"
                ReferencedContainer = "container:SwiftUIFX.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -40,16 +40,20 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         BundleIdentifier = "com.apple.FinalCut"
+         FilePath = "/Applications/Final Cut Pro.app">
+      </PathRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6ED15EB22CD55F12005E38B1"
-            BuildableName = "SwiftUIFX.app"
-            BlueprintName = "SwiftUIFX"
+            BuildableName = "SwiftUIFX Mac.app"
+            BlueprintName = "macOS App"
             ReferencedContainer = "container:SwiftUIFX.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -62,8 +66,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6ED15EB22CD55F12005E38B1"
-            BuildableName = "SwiftUIFX.app"
-            BlueprintName = "SwiftUIFX"
+            BuildableName = "SwiftUIFX Mac.app"
+            BlueprintName = "macOS App"
             ReferencedContainer = "container:SwiftUIFX.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
