@@ -43,6 +43,9 @@ struct MyView: View {
 7. Press the "Compile" button to compile your view. It should now be displayed in your video timeline.
 8. Any time you make a change to your package you will need to press the "Compile" button again.
 
+> [!NOTE]  
+> The SwiftUIFX mac app will not auto-update, so any updates will need to be manually downloaded from the latest release.
+
 ### Environment Values
 
 To access environment values in your SwiftUI view:
