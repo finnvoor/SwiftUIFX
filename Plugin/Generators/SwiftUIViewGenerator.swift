@@ -136,12 +136,12 @@ extension SwiftUIViewGenerator {
     }
 
     private func swiftBuild(package: URL) throws -> URL {
-        let dylib = package.appendingPathComponent(".build/debug/lib\(package.lastPathComponent).dylib")
+        let dylib = package.appendingPathComponent(".build/release/lib\(package.lastPathComponent).dylib")
         try? FileManager.default.removeItem(at: dylib)
 
         let process = Process()
         process.executableURL = URL(filePath: "/usr/bin/swift")
-        process.arguments = ["build", "--package-path", package.path()]
+        process.arguments = ["build", "-c", "release", "--package-path", package.path()]
 
         let standardError = Pipe()
         process.standardError = standardError
