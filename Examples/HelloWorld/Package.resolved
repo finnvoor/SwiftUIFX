@@ -1,0 +1,15 @@
+{
+  "originHash" : "3fafc0e42390d3e32ea69b729e844a2445a1209e17f3b948fbcf0e0ef11b56e4",
+  "pins" : [
+    {
+      "identity" : "swiftuifx",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/finnvoor/SwiftUIFX.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "34a88853e7ec29428d9a26262b2590467f72395e"
+      }
+    }
+  ],
+  "version" : 3
+}

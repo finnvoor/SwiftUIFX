@@ -70,6 +70,9 @@ import SwiftUIFX
 @Environment(\.generatorTimeRange) var generatorTimeRange: CMTimeRange
 ```
 
+> [!NOTE]  
+> See the [Examples](Examples/) directory for example packages that can be used with SwiftUIFX.
+
 ### Development
 
 1. Clone the repository.
