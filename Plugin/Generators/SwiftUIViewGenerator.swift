@@ -1,3 +1,4 @@
+import OSLog
 import SwiftUI
 import SwiftUIFX
 
@@ -14,6 +15,7 @@ import SwiftUIFX
     }
 
     override func addParameters() throws {
+        logger.debug("Adding parameters")
         apiManager.parameterCreationAPI.addStringParameter(
             withName: "Package Path (Drag & Drop)",
             parameterID: 1,
@@ -42,6 +44,7 @@ import SwiftUIFX
     }
 
     override func pluginInstanceAddedToDocument() {
+        logger.debug("Plugin instance added to document")
         compile()
     }
 
@@ -67,25 +70,29 @@ import SwiftUIFX
         pluginState: Data?,
         at _: CMTime
     ) throws -> CIImage {
-        guard let view else { return .clear }
+        try compileQueue.sync {
+            guard let view else { return .clear }
 
-        let state = try JSONDecoder().decode(State.self, from: pluginState ?? Data())
+            let state = try JSONDecoder().decode(State.self, from: pluginState ?? Data())
 
-        return DispatchQueue.main.sync {
-            let renderer = ImageRenderer(
-                content: view
-                    .environment(\.timelineTime, state.timelineTime)
-                    .environment(\.timelineTimeRange, state.timelineTimeRange)
-                    .environment(\.generatorTimeRange, state.generatorTimeRange)
-                    .frame(width: sourceImages[0].extent.width, height: sourceImages[0].extent.height)
-            )
-            renderer.proposedSize = .init(sourceImages[0].extent.size)
-            return CIImage(cgImage: renderer.cgImage!, options: [.applyOrientationProperty: true])
+            return DispatchQueue.main.sync {
+                let renderer = ImageRenderer(
+                    content: view
+                        .environment(\.timelineTime, state.timelineTime)
+                        .environment(\.timelineTimeRange, state.timelineTimeRange)
+                        .environment(\.generatorTimeRange, state.generatorTimeRange)
+                        .frame(width: sourceImages[0].extent.width, height: sourceImages[0].extent.height)
+                )
+                renderer.proposedSize = .init(sourceImages[0].extent.size)
+                return CIImage(cgImage: renderer.cgImage!, options: [.applyOrientationProperty: true])
+            }
         }
     }
 
     // MARK: Private
 
+    private let compileQueue = DispatchQueue(label: "SwiftUIViewGenerator.compile")
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "SwiftUIViewGenerator")
     private var view: AnyView?
 }
 
@@ -110,18 +117,21 @@ extension SwiftUIViewGenerator {
     }
 
     func compile() {
-        var packagePath: NSString = ""
-        apiManager.parameterRetrievalAPI.getStringParameterValue(&packagePath, fromParameter: 1)
-        let package = URL(filePath: packagePath as String)
+        compileQueue.sync {
+            logger.debug("Compiling")
+            var packagePath: NSString = ""
+            apiManager.parameterRetrievalAPI.getStringParameterValue(&packagePath, fromParameter: 1)
+            let package = URL(filePath: packagePath as String)
 
-        guard !(packagePath as String).isEmpty else { return }
+            guard !(packagePath as String).isEmpty else { return }
 
-        do {
-            let dylib = try swiftBuild(package: package)
-            view = try loadView(from: dylib)
-        } catch {
-            print(error.localizedDescription)
-            Task { await showAlert(message: error.localizedDescription) }
+            do {
+                let dylib = try swiftBuild(package: package)
+                view = try loadView(from: dylib)
+            } catch {
+                logger.error("\(error.localizedDescription, privacy: .public)")
+                Task { await showAlert(message: error.localizedDescription) }
+            }
         }
     }
 
