@@ -419,7 +419,7 @@
 				CODE_SIGN_ENTITLEMENTS = "$(TARGET_NAME)/Supporting Files/Entitlements.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YF6GMG9Q86;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Supporting Files/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.finnvoorhees.SwiftUIFX;
@@ -435,7 +435,7 @@
 				CODE_SIGN_ENTITLEMENTS = "$(TARGET_NAME)/Supporting Files/Entitlements.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YF6GMG9Q86;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Supporting Files/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.finnvoorhees.SwiftUIFX;
