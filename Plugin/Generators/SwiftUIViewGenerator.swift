@@ -134,7 +134,7 @@ extension SwiftUIViewGenerator {
 
     private func loadView(from dylib: URL) throws -> AnyView {
         guard let handle = dlopen(dylib.path, RTLD_NOW | RTLD_LOCAL) else {
-            throw Error.missingDylib(path: dylib)
+            throw Error.dlopenFailed(error: String(cString: dlerror()))
         }
         defer { dlclose(handle) }
         guard let symbol = dlsym(handle, "createView") else {
@@ -163,17 +163,15 @@ extension SwiftUIViewGenerator {
 
 enum Error: Swift.Error, LocalizedError {
     case swiftError(message: String)
-    case missingDylib(path: URL)
+    case dlopenFailed(error: String)
     case missingSymbol
 
     // MARK: Internal
 
     var errorDescription: String? {
         switch self {
-        case let .swiftError(message):
-            message
-        case let .missingDylib(path):
-            "Could not find dylib at \(path.path). Ensure your library product is set to type: .dynamic in your Package.swift file, and that the library name matches the package name."
+        case let .swiftError(message): message
+        case let .dlopenFailed(error): error
         case .missingSymbol:
             """
             Failed to load view from dylib. Make sure you include a createView function that returns a pointer to your view. Example:
