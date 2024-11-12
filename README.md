@@ -2,7 +2,7 @@
 
 ### Instructions
 
-1. Install the [SwiftUIFX app](https://github.com/finnvoor/SwiftUIFX/releases/latest/download/SwiftUIFX.app.zip). Open the app at least once to allow it to run.
+1. Move the [SwiftUIFX app](https://github.com/finnvoor/SwiftUIFX/releases/latest/download/SwiftUIFX.app.zip) to Applications, and run `xattr -cr /Applications/SwiftUIFX.app` to allow the app to be run. Open the app at least once.
 2. Unzip [SwiftUIFX.zip](https://github.com/finnvoor/SwiftUIFX/releases/latest/download/SwiftUIFX.zip) and place the SwiftUIFX directory into `/Applications/Final Cut Pro.app/Contents/PlugIns/MediaProviders/MotionEffect.fxp/Contents/Resources/Templates.localized/Generators.localized/`.
 3. Ensure you have the Swift toolchain installed, and create a new Swift package. Ensure the package's library name matches the package name, and set the library's `type` to `.dynamic`.
 ```swift
