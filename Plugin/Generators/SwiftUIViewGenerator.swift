@@ -24,7 +24,19 @@ import SwiftUIFX
         apiManager.parameterCreationAPI.addPushButton(
             withName: "Compile",
             parameterID: 2,
-            selector: #selector(SwiftUIViewGenerator.compile),
+            selector: #selector(SwiftUIViewGenerator.updateAndCompile),
+            parameterFlags: FxParameterFlags(kFxParameterFlag_DEFAULT)
+        )
+
+        apiManager.parameterCreationAPI.addIntSlider(
+            withName: "Update",
+            parameterID: 3,
+            defaultValue: 0,
+            parameterMin: Int32.min,
+            parameterMax: Int32.max,
+            sliderMin: Int32.min,
+            sliderMax: Int32.max,
+            delta: 1,
             parameterFlags: FxParameterFlags(kFxParameterFlag_DEFAULT)
         )
     }
@@ -88,7 +100,16 @@ extension SwiftUIViewGenerator {
 }
 
 extension SwiftUIViewGenerator {
-    @objc func compile() {
+    @objc func updateAndCompile() {
+        apiManager.parameterSettingAPI.setIntValue(
+            Int32.random(in: Int32.min...Int32.max),
+            toParameter: 3,
+            at: .zero
+        )
+        compile()
+    }
+
+    func compile() {
         var packagePath: NSString = ""
         apiManager.parameterRetrievalAPI.getStringParameterValue(&packagePath, fromParameter: 1)
         let package = URL(filePath: packagePath as String)
