@@ -73,3 +73,7 @@ import SwiftUIFX
 2. Run `swift build -c release --arch arm64 --arch x86_64` at the top level of the repository.
 3. Change the code sign identity in the build script phases of Plugin ("Copy and Code Sign FxPlug.framework" and "Copy and Code Sign PluginManager.framework"). 
 4. Open `SwiftUIFX.xcodeproj`.
+
+### Acknowledgements
+
+Thanks to [Arclite/Halloween2024](https://github.com/Arclite/Halloween2024) for demonstrating how SwiftUI views can be loaded from a dylib.
