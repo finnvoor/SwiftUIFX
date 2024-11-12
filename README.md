@@ -1,5 +1,7 @@
 # SwiftUIFX
 
+![card](https://github.com/user-attachments/assets/e564f5b3-8f13-450e-a28c-b29c80f7eaa8)
+
 ### Instructions
 
 1. Move the [SwiftUIFX app](https://github.com/finnvoor/SwiftUIFX/releases/latest/download/SwiftUIFX.app.zip) to Applications, and run `xattr -cr /Applications/SwiftUIFX.app` to un-quarantine the app (see https://github.com/finnvoor/SwiftUIFX/issues/4). Open the app at least once to allow it to run.
